@@ -9,9 +9,9 @@ class DeletePage:
         self.wait = WebDriverWait(driver, 10)
 
     # Locators
-    delete_checkbox_button = (By.XPATH, "//div[contains(@class,'UploadPhoto_gridImage')]//input[@type='checkbox'])[1]")
+    delete_checkbox_button = (By.XPATH, "//div[@class='UploadPhoto_imageGrid__1O0BV']//div[4]//div[1]//input[1]")
     delete_all_button = (By.XPATH, "//img[@alt='Delete']")
-    confirm_delete_button = (By.XPATH, " //img[@alt='Delete']")
+    confirm_delete_button = (By.XPATH, "//button[contains(@class,'UploadPhoto_confirmDeleteButton')]")
     # cancel_delete_button = (By.XPATH, "//button[normalize-space()='No']")
 
 

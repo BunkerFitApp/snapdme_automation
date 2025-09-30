@@ -1,3 +1,4 @@
+import allure
 # from pages.login_page import LoginPage
 # from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.webdriver.support import expected_conditions as EC
@@ -42,6 +43,7 @@ from pages.login_page import LoginPage
     ("", "Nikhil@123", "Email is required", "negative"),
     ("nikhil.kushwaha@spectacom.in", "", "Password is required", "negative"),
 ])
+@pytest.mark.order(1)
 def test_login(driver, email, password, expected, case_type):
     driver.get("https://dev.events.snapdme.com/")
 

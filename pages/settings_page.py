@@ -9,8 +9,8 @@ class SettingsPage:
 		self.wait = WebDriverWait(driver, 10)
 
 	# Locators
-	event_settings_button = (By.XPATH, "//button[contains(@class,'event_settings_btn')]")
-	event_name_input = (By.XPATH, "//input[@placeholder='Event Name']")
+	event_settings_button = (By.XPATH, "//button[normalize-space()='Event Settings']")
+	event_name_input = (By.XPATH, "//input[@name='eventName']")
 	event_location_input = (By.XPATH, "//input[@placeholder='eg. New Delhi, India']")
 	event_description_input = (By.XPATH, "//textarea[@placeholder='What this event is all about?']")
 	done_button = (By.XPATH, "//button[normalize-space()='Done']")
@@ -18,12 +18,8 @@ class SettingsPage:
 
 	# Actions
 	def open_event_settings(self):
-		try:
-			self.wait.until(EC.element_to_be_clickable(self.event_settings_button)).click()
-			return True
-		except TimeoutException:
-			# No event present
-			return False
+		self.wait.until(EC.element_to_be_clickable(self.event_settings_button)).click()
+
 
 	def edit_event_details(self, name=None, location=None, description=None):
 		if name:

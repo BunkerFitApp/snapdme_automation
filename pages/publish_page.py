@@ -8,20 +8,12 @@ class PublishPage:
 		self.wait = WebDriverWait(driver, 10)
 
 	# Locators
-	sidebar_publish_button = (By.XPATH, "//span[contains(text(),'Publish')]/parent::button")
-	publish_event_button = (By.XPATH, "//button[contains(text(),'Publish Event')]")
-	confirm_publish_button = (By.XPATH, "//button[contains(text(),'Confirm')]")
-	success_message = (By.XPATH, "//*[contains(text(),'Event published successfully')]")
+	publish_1_button = (By.XPATH, "//body[1]/div[1]/div[2]/main[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[3]")
+	publish_2_button = (By.XPATH, "//div[@class='allAlbum_headerRight__jP1I8']//div[contains(@class,'allAlbum_toggleOn__')] | //div[@class='allAlbum_headerRight__jP1I8']//div[contains(@class,'allAlbum_toggleOff__')]")
 
 	# Actions
-	def click_publish_sidebar(self):
-		self.wait.until(EC.element_to_be_clickable(self.sidebar_publish_button)).click()
+	def click_publish_event_1(self):
+		self.wait.until(EC.element_to_be_clickable(self.publish_1_button)).click()
 
-	def click_publish_event(self):
-		self.wait.until(EC.element_to_be_clickable(self.publish_event_button)).click()
-
-	def confirm_publish(self):
-		self.wait.until(EC.element_to_be_clickable(self.confirm_publish_button)).click()
-
-	def get_success_message(self):
-		return self.wait.until(EC.presence_of_element_located(self.success_message)).text
+	def click_publish_event_2(self):
+		self.wait.until(EC.element_to_be_clickable(self.publish_2_button)).click()
