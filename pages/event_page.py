@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import os
 
 class EventPage:
     def __init__(self, driver):
@@ -10,7 +11,7 @@ class EventPage:
     # Locators
     add_new_event_button = (By.XPATH, "//button[normalize-space()='Add New Event']")
     open_first_event_button = (By.XPATH, "(//button[contains(@class,'allEvent_openAlbumBtn__wzqeq')])[1]")
-    event_name_input = (By.XPATH, "//*[@id='__next']/div[2]/main/div[2]/div/div[3]/div/form/div[1]/div[1]/input")
+    event_name_input = (By.XPATH, "//input[@name='eventName']")
     event_location_input = (By.XPATH, "//input[@placeholder='eg. New Delhi, India']")
     dropdown_event_type = (By.XPATH, "//div[@class='noEvent_dropdown__aheB4']")
     dropdown_option_dj = (By.XPATH, "//div[text()='Dj']")
@@ -38,8 +39,9 @@ class EventPage:
     def enter_description(self, description):
         self.wait.until(EC.presence_of_element_located(self.event_description)).send_keys(description)
     
-    def upload_cover_image(self, file_path):
-        self.wait.until(EC.presence_of_element_located(self.cover_image)).send_keys(file_path)    
+    def upload_cover_image(self, filename="test_photo.jpg"):
+        file_path = os.path.join(os.getcwd(), "resources", filename)
+        self.wait.until(EC.presence_of_element_located(self.cover_image)).send_keys(file_path)
 
     def click_done(self):
         self.wait.until(EC.element_to_be_clickable(self.done_button)).click()

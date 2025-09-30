@@ -1,9 +1,11 @@
 from pages.event_page import EventPage
 from pages.login_page import LoginPage
 from selenium.webdriver.common.by import By
+import pytest
 
 import time
 
+@pytest.mark.order(2)   
 def test_add_event(driver):
     driver.get("https://dev.events.snapdme.com/")
 
@@ -21,7 +23,7 @@ def test_add_event(driver):
     event_page = EventPage(driver)
     event_page.click_add_new_event()
     print("Filling event details-name...")   
-    event_page.enter_event_name("Corporate War")
+    event_page.enter_event_name("Corp War")
     print("Filling event details-location...")
     event_page.enter_location("delhi")
     print("Filling event details-type...")

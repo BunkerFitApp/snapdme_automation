@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait 
+import os
 
 
 
@@ -11,14 +12,16 @@ class AlbumPage:
         self.wait = WebDriverWait(driver, 10)
     
     # Locators
-    open_album_button = (By.XPATH, "//div[@class='allEvent_mainContent__hQDro']//div[1]//div[2]//div[2]//button[1]")
+    # open_album_button = (By.XPATH, "//div[@class='allEvent_mainContent__hQDro']//div[1]//div[2]//div[2]//button[1]")
+    open_album_button = (By.XPATH, "//button[contains(@class,'allAlbum_uploadPhotosBtn') and normalize-space()='Upload Photos']")
+
     create_album_btn = (By.XPATH, "//img[@alt='Create']")
-    add_album_btn = (By.XPATH, "//img[@alt='Upload']")
+    add_album_btn = (By.XPATH, "//div[@class='allAlbum_headerRight__jP1I8']//button[3]")
     album_name_input = (By.XPATH, "//input[@placeholder='Wedding Photography']")
     album_description_input = (By.XPATH, "//textarea[@placeholder='What this album is all about?']")
     photo_upload_input = (By.XPATH, "//input[@type='file']")
     save_button = (By.XPATH, "//button[normalize-space()='Done']")
-    first_album_card = (By.XPATH,"//div[contains(@class,'allAlbum_albumCard__')][1]")
+    first_album_card = (By.XPATH,"//div[contains(@class,'allAlbum_albumCard__')][1]//button[normalize-space()='Upload Photos']")
     # upload_photos_button = (By.XPATH, "(//button[contains(text(),'Upload Photos'])[1]")
 
 
@@ -56,9 +59,10 @@ class AlbumPage:
     def enter_album_description(self, description):
         self.driver.find_element(*self.album_description_input).send_keys(description)
 
-    def upload_photo(self, file_path):
+    def upload_photo(self, file_name="test_photo.jpg"):
+        file_path = os.path.join(os.getcwd(), "resources", file_name)
         self.driver.find_element(*self.photo_upload_input).send_keys(file_path)
-
+        
     def click_save(self):
         self.driver.find_element(*self.save_button).click()
  

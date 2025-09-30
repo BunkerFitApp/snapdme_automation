@@ -1,0 +1,7 @@
+base_url: "https://dev.events.snapdme.com/"
+login:
+  email: "nikhil.kushwaha@spectacom.in"
+  password: "Nikhil@123"
+# paths:
+#   album_page: "/album"
+#   event_page: "/event"
