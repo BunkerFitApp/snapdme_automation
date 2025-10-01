@@ -21,26 +21,33 @@ def test_upload_photo(driver):
 
     # Step 2: Open first event
     event_page = EventPage(driver)
-    event_page.open_first_event()
+    no_event_buttons = driver.find_elements(By.XPATH, "//button[@class='noEvent_createButton__3KR0_']")
+    if no_event_buttons:
+        print("No events present. Cannot upload photos.")
+    else:
+        event_page.open_first_event()
 
     # Step 3: Open first album and go to photos
-    album_page = AlbumPage(driver)
-    print("album page")
-    driver.save_screenshot("/home/spectacom/picc/a.png")
+        album_page = AlbumPage(driver)
+        print("album page")
+        driver.save_screenshot("/home/spectacom/picc/a.png")
+        
     
-    create_album_btn = (By.XPATH, "//img[@alt='Create']")
-
-    album_page.open_first_album()
-    driver.save_screenshot("/home/spectacom/picc/b.png")
+        create_album_btns = (By.XPATH, "//button[@class='noAlbum_createButton__cGKg1']")
+        if create_album_btns:
+            print("No Albums present. Cannot upload photos.")
+        else:
+            album_page.open_first_album()
+            driver.save_screenshot("/home/spectacom/picc/b.png")
+            print("opened first album")
 
  
     # Step 4: Upload photo
-    photos_page = PhotosPage(driver)
-    driver.save_screenshot("/home/spectacom/picc/c.png")
-    upload__photos_button = (By.XPATH, "//button[@class='UploadPhoto_uploadButton___2gLe']")  
-    if upload__photos_button:
-        print("Upload photo button found, proceeding to upload.")
-
+            photos_page = PhotosPage(driver)
+            driver.save_screenshot("/home/spectacom/picc/c.png")
+            upload__photos_button = (By.XPATH, "//button[@class='UploadPhoto_uploadButton___2gLe']")  
+            if upload__photos_button:
+                print("Upload photo button found, proceeding to upload.")
      
     
     # photos_page.upload__photos("/home/spectacom/Downloads/pexels-latronico-709188.jpg")

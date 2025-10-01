@@ -26,6 +26,9 @@ def test_coupons_flow(driver):
     tile_values = coupons_page.get_tile_values()
     print(f"Number of tiles found: {len(tile_values)}")
     tile_numbers = [int(value.split("\n")[-1]) for value in tile_values[:3]]
+    
+    redemption_rate_str = tile_values[3].split("\n")[-1]
+    redemption_rate = int(redemption_rate_str.replace("%", "").strip())
     print("Tile Values:")
     for idx, value in enumerate(tile_values, 1):
         print(f"Tile {idx}: {value}")

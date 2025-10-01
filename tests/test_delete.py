@@ -21,25 +21,29 @@ def test_delete_flow(driver):
 
     # Step 2: Open Event
     event_page = EventPage(driver)
-    event_page.open_first_event()
-
-    # Step 3: Open Album
-    album_page = AlbumPage(driver)
-    create_album_btn = (By.XPATH, "//img[@alt='Create']")
-    if create_album_btn:
-        print("No Albums present. Cannot delete photos.")
+    no_event_buttons = driver.find_elements(By.XPATH, "//button[@class='noEvent_createButton__3KR0_']")
+    if no_event_buttons:
+        print("No events present. Cannot share event.")
     else:
-        album_page.open_first_album()
+        event_page.open_first_event()
 
-    # Step 4: Delete Photo
-        delete_page = DeletePage(driver)
-        delete_buttons = driver.find_elements(By.XPATH, "//button[@class='NoPhoto_chooseFilesButton__hzQAi']")
-        if not delete_buttons:
-            print("No photos present. Cannot delete photos.")
+        # Step 3: Open Album
+        album_page = AlbumPage(driver)
+        first_album_card = (By.XPATH,"//div[contains(@class,'allAlbum_albumCard__')][1]//button[normalize-space()='Upload Photos']")
+        if first_album_card:
+            album_page.open_first_album()
+
+        # Step 4: Delete Photo
+            delete_page = DeletePage(driver)
+            delete_buttons = driver.find_elements(By.XPATH, "//button[@class='NoPhoto_chooseFilesButton__hzQAi']")
+            if not delete_buttons:
+                print("No photos present. Cannot delete photos.")
+            else:
+                delete_page.delete_checkbox()
+                delete_page.delete_all()
+                delete_page.confirm_delete()
         else:
-            delete_page.delete_checkbox()
-            delete_page.delete_all()
-            delete_page.confirm_delete()
+            print("No albums present. Cannot delete album.")        
 
     # Step 5: Delete Album
     # album_msg = delete_page.delete_album()

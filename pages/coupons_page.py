@@ -27,7 +27,10 @@ class CouponsPage:
     def get_tile_values(self):
         values = []
         for locator in self.tile_locators:
-            value = self.wait.until(EC.presence_of_element_located(locator)).text
+            value = self.wait.until(
+                lambda driver: "Loading..." not in driver.find_element(*locator).text
+            )
+            value =self.driver.find_element(*locator).text.strip()
             values.append(value)
         return values
 
